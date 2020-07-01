@@ -23,10 +23,16 @@ public class TesteController {
 		return restauranteRepository.consultarPorNome(nome, cozinhaId);
 	}
 	
-	@GetMapping("/restaurantes/por-nome-frete")
-	public List<Restaurante> restaurantePorNomeFrete(String nome,
+	@GetMapping("/restaurantes/por-nome-frete-jpql")
+	public List<Restaurante> restaurantePorNomeFreteJPQL(String nome,
 			BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal){
-		return restauranteRepository.find(nome, taxaFreteInicial, taxaFreteFinal);
+		return restauranteRepository.findJPQL(nome, taxaFreteInicial, taxaFreteFinal);
+	}
+	
+	@GetMapping("/restaurantes/por-nome-frete-criteria")
+	public List<Restaurante> restaurantePorNomeFreteCriteria(String nome,
+			BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal){
+		return restauranteRepository.findCriteria(nome, taxaFreteInicial, taxaFreteFinal);
 	}
 
 }
