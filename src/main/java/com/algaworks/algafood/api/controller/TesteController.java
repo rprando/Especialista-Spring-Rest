@@ -1,8 +1,5 @@
 package com.algaworks.algafood.api.controller;
 
-import static com.algaworks.algafood.infrastructure.repository.specification.RestauranteSpecification.freteGratis;
-import static com.algaworks.algafood.infrastructure.repository.specification.RestauranteSpecification.nomeSemelhante;
-
 import java.math.BigDecimal;
 import java.util.List;
 

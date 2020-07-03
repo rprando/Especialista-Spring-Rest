@@ -1,14 +1,20 @@
 package com.algaworks.algafood.domain.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Restaurante {
@@ -25,6 +31,16 @@ public class Restaurante {
 	@ManyToOne
 	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
+	
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "restaurante_forma_pagamento",
+			joinColumns = @JoinColumn(name = "restaurante_id"),
+			inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
+	private List<FormaPagamento> formasPagamento;
+	
+	@Embedded
+	private Endereco endereco;
 
 	public Long getId() {
 		return id;
@@ -58,6 +74,22 @@ public class Restaurante {
 		this.cozinha = cozinha;
 	}
 
+	public List<FormaPagamento> getFormasPagamento() {
+		return formasPagamento;
+	}
+	
+	public void setFormasPagamento(List<FormaPagamento> formasPagamento) {
+		this.formasPagamento = formasPagamento;
+	}
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,5 +114,6 @@ public class Restaurante {
 			return false;
 		return true;
 	}
+
 	
 }
